@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCEA Lesson Plan Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <h1>NCEA Lesson Plan Generator</h1>
+        <form @submit.prevent="generatePlan">
+            <fieldset>
+                <legend>Lesson Details</legend>
+                <label>Date <input type="date" v-model="form.date" required></label>
+                <label>Lesson Duration (minutes) <input type="number" v-model="form.duration" required></label>
+                <label>Year Level
+                <select v-model="form.yearLevel">
+                    <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+                </select>
+                </label>
+                <label>Number of Students <input type="number" v-model="form.studentCount" required></label>
+                <label>Subject
+                <select v-model="form.subject">
+                    <option v-for="subject in subjects" :key="subject" :value="subject">{{ subject }}</option>
+                </select>
+                </label>
+                <label>Focus <input type="text" v-model="form.focus" required></label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Curriculum Links</legend>
+                <label>Achievement Objectives
+                <div class="checkbox-group">
+                    <label v-if="!objectives.length" style="color: #888;">No objectives for this selection.</label>
+                    <label v-for="(obj, i) in objectives" :key="i">
+                    <input type="checkbox" :value="obj" v-model="form.achievementObjectives" />
+                    <span v-html="obj"></span>
+                    </label>
+                </div>
+                </label>
+
+                <label>Key Competencies
+                <div class="checkbox-group">
+                    <label><input type="checkbox" value="Thinking" v-model="form.keyCompetencies" /> Thinking</label>
+                    <label><input type="checkbox" value="Using language, symbols, and texts" v-model="form.keyCompetencies" /> Using language, symbols, and texts</label>
+                    <label><input type="checkbox" value="Managing self" v-model="form.keyCompetencies" /> Managing self</label>
+                    <label><input type="checkbox" value="Relating to others" v-model="form.keyCompetencies" /> Relating to others</label>
+                    <label><input type="checkbox" value="Participating and contributing" v-model="form.keyCompetencies" /> Participating and contributing</label>
+                </div>
+                </label>
+
+                <label>Cultural Competencies
+                <div class="checkbox-group">
+                    <label><input type="checkbox" value="Tātaiako: Wānanga" v-model="form.culturalCompetencies" /> <b>Wānanga</b>: Engaging in respectful dialogue and shared learning through effective communication and collaborative problem-solving.</label>
+                    <label><input type="checkbox" value="Tātaiako: Whanaungatanga" v-model="form.culturalCompetencies" /> <b>Whanaungatanga</b>: Building strong, respectful relationships that foster a sense of belonging and trust within the learning community.</label>
+                    <label><input type="checkbox" value="Tātaiako: Manaakitanga" v-model="form.culturalCompetencies" /> <b>Manaakitanga</b>: Showing care, respect, and kindness to others by creating a safe, inclusive, and welcoming learning environment.</label>
+                    <label><input type="checkbox" value="Tātaiako: Tangata whenuatanga" v-model="form.culturalCompetencies" /> <b>Tangata whenuatanga</b>: Affirming Māori learners’ identities by valuing their language, culture, and heritage, and incorporating these into teaching practice.</label>
+                    <label><input type="checkbox" value="Tātaiako: Ako" v-model="form.culturalCompetencies" /> <b>Ako</b>: Teaching and learning as a reciprocal relationship, where both teachers and students learn from each other’s knowledge and experiences.</label>
+                </div>
+                </label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Learning Intentions & Criteria</legend>
+                <label>Learning Intentions <textarea v-model="form.learningIntentions"></textarea></label>
+                <label>Success Criteria <textarea v-model="form.successCriteria"></textarea></label>
+                <label>Links with Other Learning Areas <textarea v-model="form.links"></textarea></label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Priorities & Context</legend>
+                <label>VUW Cross-Program Priorities
+                <div class="checkbox-group">
+                    <label><input type="checkbox" value="Mātauranga-a-iwi" v-model="form.vuwPriorities" /> Mātauranga-a-iwi</label>
+                    <label><input type="checkbox" value="The Digital Age Educator" v-model="form.vuwPriorities" /> The Digital Age Educator</label>
+                    <label><input type="checkbox" value="Education for Pacific Peoples" v-model="form.vuwPriorities" /> Education for Pacific Peoples</label>
+                    <label><input type="checkbox" value="Inclusive Education" v-model="form.vuwPriorities" /> Inclusive Education</label>
+                </div>
+                </label>
+                <label>Class/School Priorities <textarea v-model="form.classPriorities"></textarea></label>
+                <label>Context for Learning <textarea v-model="form.context"></textarea></label>
+                <label>Assessment Info / Other Knowledge of Students <textarea v-model="form.assessmentInfo"></textarea></label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Activities</legend>
+                <div v-for="(activity, index) in form.activities" :key="index" class="activity">
+                <label>Activity Name <input type="text" v-model="activity.name" /></label>
+                <label>Duration (minutes) <input type="number" v-model="activity.duration" /></label>
+                <label>Teacher Activities <textarea v-model="activity.teacher"></textarea></label>
+                <label>Student Activities <textarea v-model="activity.student"></textarea></label>
+                <label>Resources <textarea v-model="activity.resources"></textarea></label>
+                </div>
+                <button type="button" class="button" @click="addActivity">Add Activity</button>
+            </fieldset>
+
+            <fieldset>
+                <legend>Evaluation</legend>
+                <label>Evaluation Criteria <textarea v-model="form.evaluation"></textarea></label>
+            </fieldset>
+
+            <button class="button" type="submit">Generate Lesson Plan</button>
+            </form>
+
+            <!-- Output -->
+            <div class="output" id="lessonPlanOutput" v-html="lessonOutput" v-if="lessonOutput"></div>
+
+    </div>
+    <!-- Vue.js 3 -->
+    <script src="vue.global.prod.js"></script>
+    <!-- App logic -->
+    <script src="script.js"></script>
+</body>
+</html>

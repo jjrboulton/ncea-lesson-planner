@@ -1,0 +1,45 @@
+input, select, textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem; /* More horizontal padding */
+    margin-top: 0.3rem;
+    margin-bottom: 0.8rem;   /* Add bottom margin for spacing */
+    box-sizing: border-box;
+}
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.2rem; /* Add a little space below label */
+}
+.checkbox-group label {
+    margin-bottom: 0.5rem; /* Space between checkboxes */
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6em;
+    font-weight: normal;
+}
+.checkbox-group input[type="checkbox"] {
+    margin-top: 0.2em;
+}
+/* Prevent checkboxes from stretching */
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    margin-top: 0.2em;
+}
+.checkbox-group label {
+    width: auto;
+}
+body { font-family: Arial, sans-serif; padding: 1rem; max-width: 900px; margin: auto; background: #f4f4f4; }
+h1, h2 { text-align: center; }
+.checkbox-group { display: flex;
+    flex-direction: column; /* Stack labels vertically */
+    gap: 0.5rem;            /* Less vertical space between items */
+    margin-top: 0.3rem;
+    margin-bottom: 1.2rem; }
+.activity { border: 1px solid #ccc; padding: 0.5rem; margin-top: 1rem; background: #fff; box-sizing: border-box; max-width: 100%; margin-bottom: 1.2rem; }
+.activity input, .activity textarea { width: 100%; box-sizing: border-box; }
+.button, button[type="button"] { margin-top: 1.5rem; padding: 1rem; font-size: 1rem; background: #0078d7; color: white; border: none; cursor: pointer; }
+.output { margin-top: 2rem; background: white; padding: 1rem; border: 1px solid #ccc; }
+fieldset { border: 1px solid #bbb; border-radius: 6px; margin-bottom: 1.5rem; padding: 1.2rem; background: #fafafa; }
+legend { font-weight: bold; padding: 0 0.5em; }
+textarea { min-height: 60px; }
