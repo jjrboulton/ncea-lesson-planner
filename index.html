@@ -86,11 +86,11 @@
             <fieldset>
                 <legend>Activities</legend>
                 <div v-for="(activity, index) in form.activities" :key="index" class="activity">
-                <label>Activity Name <input type="text" v-model="activity.name" /></label>
-                <label>Duration (minutes) <input type="number" v-model="activity.duration" /></label>
-                <label>Teacher Activities <textarea v-model="activity.teacher"></textarea></label>
-                <label>Student Activities <textarea v-model="activity.student"></textarea></label>
-                <label>Resources <textarea v-model="activity.resources"></textarea></label>
+                    <label>Activity Name <input type="text" v-model="activity.name" /></label>
+                    <label>Duration (minutes) <input type="number" v-model="activity.duration" /></label>
+                    <label>Teacher Activities <textarea v-model="activity.teacher"></textarea></label>
+                    <label>Student Activities <textarea v-model="activity.student"></textarea></label>
+                    <label>Resources <textarea v-model="activity.resources"></textarea></label>
                 </div>
                 <button type="button" class="button" @click="addActivity">Add Activity</button>
             </fieldset>
@@ -100,11 +100,11 @@
                 <label>Evaluation Criteria <textarea v-model="form.evaluation"></textarea></label>
             </fieldset>
 
-            <button class="button" type="submit">Generate Lesson Plan</button>
-            </form>
+            <button class="button" style="margin-bottom: 80px;" type="submit">Generate Lesson Plan</button>
+        </form>
 
-            <!-- Output -->
-            <div class="output" id="lessonPlanOutput" v-html="lessonOutput" v-if="lessonOutput"></div>
+        <!-- Output -->
+        <div class="output" style="margin-bottom: 80px;" id="lessonPlanOutput" v-html="lessonOutput" v-if="lessonOutput"></div>
 
     </div>
     <!-- Vue.js 3 -->
